@@ -10,23 +10,23 @@ const char *
 num_files(const char *path)
 {
 	struct dirent *dp;
-	DIR *dir;
+	DIR *fd;
 	int num;
 
-	if (!(dir = opendir(path))) {
+	if (!(fd = opendir(path))) {
 		warn("opendir '%s':", path);
 		return NULL;
 	}
 
 	num = 0;
-	while ((dp = readdir(dir))) {
+	while ((dp = readdir(fd))) {
 		if (!strcmp(dp->d_name, ".") || !strcmp(dp->d_name, ".."))
 			continue; /* skip self and parent */
 
 		num++;
 	}
 
-	closedir(dir);
+	closedir(fd);
 
 	return bprintf("%d", num);
 }

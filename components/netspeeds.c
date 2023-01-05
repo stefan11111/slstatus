@@ -16,7 +16,7 @@
 	{
 		uintmax_t oldrxbytes;
 		static uintmax_t rxbytes;
-		extern const unsigned int interval;
+		//extern const unsigned int interval;
 		char path[PATH_MAX];
 
 		oldrxbytes = rxbytes;
@@ -27,9 +27,7 @@
 			return NULL;
 		if (oldrxbytes == 0)
 			return NULL;
-
-		return fmt_human((rxbytes - oldrxbytes) * 1000 / interval,
-		                 1024);
+		return fmt_human((rxbytes-oldrxbytes), 1024);
 	}
 
 	const char *
@@ -37,7 +35,7 @@
 	{
 		uintmax_t oldtxbytes;
 		static uintmax_t txbytes;
-		extern const unsigned int interval;
+		//extern const unsigned int interval;
 		char path[PATH_MAX];
 
 		oldtxbytes = txbytes;
@@ -48,9 +46,7 @@
 			return NULL;
 		if (oldtxbytes == 0)
 			return NULL;
-
-		return fmt_human((txbytes - oldtxbytes) * 1000 / interval,
-		                 1024);
+		return fmt_human((txbytes-oldtxbytes),  1024);
 	}
 #elif defined(__OpenBSD__) | defined(__FreeBSD__)
 	#include <ifaddrs.h>

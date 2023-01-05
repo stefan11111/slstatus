@@ -18,17 +18,21 @@ const char *
 uptime(const char *unused)
 {
 	char warn_buf[256];
-	uintmax_t h, m;
+	uintmax_t w, d, h, m;
 	struct timespec uptime;
 
 	if (clock_gettime(UPTIME_FLAG, &uptime) < 0) {
-		snprintf(warn_buf, sizeof(warn_buf), "clock_gettime %d", UPTIME_FLAG);
+		snprintf(warn_buf, 256, "clock_gettime %d", UPTIME_FLAG);
 		warn(warn_buf);
 		return NULL;
 	}
-
-	h = uptime.tv_sec / 3600;
+	w = uptime.tv_sec / 604800;
+	d = uptime.tv_sec / 86400 % 7;
+	h = uptime.tv_sec / 3600 % 24;
 	m = uptime.tv_sec % 3600 / 60;
-
-	return bprintf("%juh %jum", h, m);
+	if(w==0&&d==0)
+		return bprintf("%juh %jum", h, m);
+	if(w==0)
+		return bprintf("%jud %juh %jum", d, h, m);
+	return bprintf("%juw %jud %juh %jum", w, d, h, m);
 }

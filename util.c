@@ -13,6 +13,9 @@ char *argv0;
 static void
 verr(const char *fmt, va_list ap)
 {
+	if (argv0 && strncmp(fmt, "usage", sizeof("usage") - 1))
+		fprintf(stderr, "%s: ", argv0);
+
 	vfprintf(stderr, fmt, ap);
 
 	if (fmt[0] && fmt[strlen(fmt) - 1] == ':') {
@@ -97,7 +100,7 @@ fmt_human(uintmax_t num, int base)
 	const char **prefix;
 	const char *prefix_1000[] = { "", "k", "M", "G", "T", "P", "E", "Z",
 	                              "Y" };
-	const char *prefix_1024[] = { "", "Ki", "Mi", "Gi", "Ti", "Pi", "Ei",
+	const char *prefix_1024[] = { "B", "KiB", "MiB", "GiB", "Ti", "Pi", "Ei",
 	                              "Zi", "Yi" };
 
 	switch (base) {
@@ -118,7 +121,7 @@ fmt_human(uintmax_t num, int base)
 	for (i = 0; i < prefixlen && scaled >= base; i++)
 		scaled /= base;
 
-	return bprintf("%.1f %s", scaled, prefix[i]);
+	return bprintf("%.2f %s", scaled, prefix[i]);
 }
 
 int

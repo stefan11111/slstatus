@@ -22,8 +22,7 @@
 	const char *
 	entropy(const char *unused)
 	{
-		// https://www.unicode.org/charts/PDF/U2200.pdf
 		/* Unicode Character 'INFINITY' (U+221E) */
-		return "\u221E";
+		return "\xe2\x88\x9e";
 	}
 #endif

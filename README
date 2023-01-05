@@ -7,7 +7,6 @@ slstatus is a suckless status monitor for window managers that use WM_NAME
 Features
 --------
 - Battery percentage/state/time left
-- Cat (read file)
 - CPU usage
 - CPU frequency
 - Custom shell commands
@@ -62,8 +61,3 @@ Configuration
 slstatus can be customized by creating a custom config.h and (re)compiling the
 source code. This keeps it fast, secure and simple.
 
-
-Upcoming
---------
-A first feature-complete release with official packages for common distributions
-will come soon.
