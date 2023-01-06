@@ -3,16 +3,8 @@
 #include <stdio.h>
 #include <time.h>
 
-#include "../slstatus.h"
 #include "../util.h"
-
-#if defined(CLOCK_BOOTTIME)
-	#define UPTIME_FLAG CLOCK_BOOTTIME
-#elif defined(CLOCK_UPTIME)
-	#define UPTIME_FLAG CLOCK_UPTIME
-#else
-	#define UPTIME_FLAG CLOCK_MONOTONIC
-#endif
+#define UPTIME_FLAG CLOCK_BOOTTIME
 
 const char *
 uptime(const char *unused)

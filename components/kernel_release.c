@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <sys/utsname.h>
 
-#include "../slstatus.h"
 #include "../util.h"
 
 const char *
