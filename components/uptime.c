@@ -9,11 +9,11 @@
 const char *
 uptime(const char *unused)
 {
-	char warn_buf[256];
 	uintmax_t w, d, h, m;
 	struct timespec uptime;
 
 	if (clock_gettime(UPTIME_FLAG, &uptime) < 0) {
+		char warn_buf[256];
 		snprintf(warn_buf, 256, "clock_gettime %d", UPTIME_FLAG);
 		warn(warn_buf);
 		return NULL;

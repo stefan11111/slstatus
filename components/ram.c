@@ -25,22 +25,38 @@
                         return NULL;
                 }
                 uintmax_t total,free,buffers,cached,slab,kernel;
-                if(!fscanf(fp,"%*s %ju %*s",&total))
+                if(!fscanf(fp,"%*s %ju %*s",&total)) {
+                        fclose(fp);
+			return NULL;
+		}
+                if(!fscanf(fp,"%*s %ju %*s",&free)) {
+                        fclose(fp);
                         return NULL;
-                if(!fscanf(fp,"%*s %ju %*s",&free))
+                }
+                if(!fscanf(fp,"%*s %ju %*s",&buffers)) {
+                        fclose(fp);
                         return NULL;
-                if(!fscanf(fp,"%*s %ju %*s",&buffers))
+                }
+                if(!fscanf(fp,"%*s %ju %*s",&buffers)) {
+                        fclose(fp);
                         return NULL;
-                if(!fscanf(fp,"%*s %ju %*s",&buffers))
+                }
+                if(!fscanf(fp,"%*s %ju %*s",&cached)) {
+                        fclose(fp);
                         return NULL;
-                if(!fscanf(fp,"%*s %ju %*s",&cached))
-                        return NULL;
+                }
                 for(int i=1;i<=20;i++)
-                        if(!fscanf(fp,"%*s %ju %*s",&slab))
-                        return NULL;
+                        if(!fscanf(fp,"%*s %ju %*s",&slab)) {
+                            fclose(fp);
+                            return NULL;
+			}
+
                 for(int i=1;i<=3;i++)
-                        if(!fscanf(fp,"%*s %ju %*s",&kernel))
-                        return NULL;
+                        if(!fscanf(fp,"%*s %ju %*s",&kernel)) {
+                            fclose(fp);
+                            return NULL;
+                        }
+
                 fclose(fp);
                 return fmt_human((total - free - buffers - cached - slab + kernel)*1024,1024);
 
