@@ -24,7 +24,7 @@
                         warn("fopen '/proc/meminfo':");
                         return NULL;
                 }
-                uintmax_t total,free,buffers,cached,slab,kernel;
+                uintmax_t total, free, buffers, cached, slab;
                 if(!fscanf(fp,"%*s %ju %*s",&total)) {
                         fclose(fp);
 			return NULL;
@@ -50,14 +50,7 @@
                             fclose(fp);
                             return NULL;
 			}
-
-                for(int i=1;i<=3;i++)
-                        if(!fscanf(fp,"%*s %ju %*s",&kernel)) {
-                            fclose(fp);
-                            return NULL;
-                        }
-
                 fclose(fp);
-                return fmt_human((total - free - buffers - cached - slab + kernel)*1024,1024);
+                return fmt_human((total - free - buffers - cached - slab)*1024,1024);
 
 	}
