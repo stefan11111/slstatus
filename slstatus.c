@@ -12,9 +12,9 @@
 #include "util.h"
 
 struct arg {
-	const char *(*func)(const char *);
+	const char *(*func)(); /* any number or arguments, of any type */
 	const char *fmt;
-	const char *args;
+	const void *args;
 };
 
 char buf[1024];

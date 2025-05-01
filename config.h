@@ -65,8 +65,8 @@ static const char unknown_str[] = "n/a";
 static const struct arg args[] = {
     /* function         format      argument */
      { kernel_release,   "%s | ",                "NULL"},
-     { netspeed_rx,      "Down %s/s | ",         "eth0"},
-     { netspeed_tx,      "Up %s/s | ",           "eth0"},
+     { netspeed_rx,      "Down %s/s | ",         (char* []){"eth0", "usb0", NULL}},
+     { netspeed_tx,      "Up %s/s | ",           (char* []){"eth0", "usb0", NULL}},
      { uptime,           "Uptime: %s | ","NULL"},
      { cpu_perc,         "Cpu: %s% | ",          "NULL"},
      { ram_used,         "Ram: %s/",             "NULL"},
