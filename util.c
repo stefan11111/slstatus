@@ -119,7 +119,9 @@ pscanf(const char *path, const char *fmt, ...)
 	int n;
 
 	if (!(fp = fopen(path, "r"))) {
+#if 0
 		warn("fopen '%s':", path);
+#endif
 		return -1;
 	}
 	va_start(ap, fmt);
